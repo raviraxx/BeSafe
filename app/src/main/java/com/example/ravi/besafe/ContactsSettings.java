@@ -73,6 +73,11 @@ public class ContactsSettings extends AppCompatActivity {
                         return;
                     }
 
+                    if(databaseHelper.readContacts().contains(number)){
+                        Toast.makeText(ContactsSettings.this, "Contact Exists", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     if(databaseHelper.insertContact(number)){
                         //refreshTextView();
                         contactsList.add(number);
