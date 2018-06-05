@@ -1,6 +1,16 @@
 <resources>
 
     <string name="app_name">BeSafe</string>
+    <string name="title_1">Welcome User</string>
+    <string name="title1">Welcome User</string>
+    <string name="description_1">We are dedicated towards your safety!</string>
+    <string name="title2">Watch Self Defence Videos</string>
+    <string name="description_2">Protect yourselves from any Kind of Dangerous stuation</string>
+    <string name="title3">Add Permissions</string>
+    <string name="description_3">Permissions are required to make this app work fluently</string>
+    <string name="go">Ready to go Inside</string>
+    <string name="title5">All Set to Go Inside</string>
+    <string name="des">Be Safe and Healthy</string>
     <string name="et_contactno">Contact Number</string>
     <string name="btn_addContact">add contact</string>
     <string name="btn_deleteContact">delete contact</string>

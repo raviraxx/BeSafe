@@ -18,34 +18,34 @@ public class PreferencesActivity extends AppCompatActivity {
 
         databaseHelper=new DatabaseHelper(getApplicationContext());
        // setContentView(R.layout.activity_preferences);
-//        SharedPreferences sharedPreferences;
-//
-//        sharedPreferences=getSharedPreferences("prefs",0);
-//        boolean first=sharedPreferences.getBoolean("firstTime",false);
-//        if(first==false)
-//        {
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putBoolean("firstTime",true);
-//            editor.commit();
-//           // startActivity(new Intent(getApplicationContext(),OnBoardingWithPer.class));
-//            finish();
-//        }
-//
-//        else{
-//          //  startActivity(new Intent(getApplicationContext(),ContactSaver.class));
-//            finish();
-//        }
+        SharedPreferences sharedPreferences;
 
-        ArrayList<String> contactList=databaseHelper.readContacts();
-        if(contactList.size()==0){
-            startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+        sharedPreferences=getSharedPreferences("prefs",0);
+        boolean first=sharedPreferences.getBoolean("firstTime",false);
+        if(first==false)
+        {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstTime",true);
+            editor.commit();
+            startActivity(new Intent(getApplicationContext(),OnBoardingWithPer.class));
+            finish();
         }
+
         else{
-
-            //finish(); this activity would be finished
-            Toast.makeText(this, "Go To Main Activity", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+           startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+            finish();
         }
+
+//        ArrayList<String> contactList=databaseHelper.readContacts();
+//        if(contactList.size()==0){
+//            startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+//        }
+//        else{
+//
+//            //finish(); this activity would be finished
+//            Toast.makeText(this, "Go To Main Activity", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+//        }
 
 
     }
