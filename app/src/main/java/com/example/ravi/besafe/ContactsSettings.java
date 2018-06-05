@@ -1,5 +1,6 @@
 package com.example.ravi.besafe;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +31,11 @@ public class ContactsSettings extends AppCompatActivity {
         et_contact=findViewById(R.id.et_contact);
         tv_contacts=findViewById(R.id.tv_contacts);
         tv_contacts.setMovementMethod(new ScrollingMovementMethod());
+
+
+
+
+
 
         refreshTextView();
         btn_add.setOnClickListener(new View.OnClickListener() {

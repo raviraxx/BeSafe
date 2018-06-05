@@ -12,7 +12,10 @@ import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.SimpleSlide;
 import com.heinrichreimersoftware.materialintro.slide.Slide;
 
+import java.util.ArrayList;
+
 public class OnBoardingWithPer extends IntroActivity {
+    DatabaseHelper databaseHelper;
     public static final String EXTRA_FULLSCREEN = "com.heinrichreimersoftware.materialintro.demo.EXTRA_FULLSCREEN";
     public static final String EXTRA_PERMISSIONS = "com.heinrichreimersoftware.materialintro.demo.EXTRA_PERMISSIONS";
     @SuppressLint("ResourceType")
@@ -22,6 +25,7 @@ public class OnBoardingWithPer extends IntroActivity {
         Intent intent = getIntent();
         boolean fullscreen = intent.getBooleanExtra(EXTRA_FULLSCREEN, false);
         boolean permissions = intent.getBooleanExtra(EXTRA_PERMISSIONS, true);
+        databaseHelper=new DatabaseHelper(getApplicationContext());
         setButtonBackVisible(false);
         setButtonNextVisible(false);
         setButtonCtaVisible(false);
@@ -81,6 +85,21 @@ public class OnBoardingWithPer extends IntroActivity {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(getApplicationContext(), "All Set to Go", Toast.LENGTH_SHORT).show();
+
+
+                        ArrayList<String> contactList=databaseHelper.readContacts();
+                        if(contactList.size()==0){
+                            startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+                        }
+                        else{
+
+                            //finish(); this activity would be finished
+                            //Toast.makeText(this, "Go To Main Activity", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        }
+
+
+
                         startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
                         finish();
                     }

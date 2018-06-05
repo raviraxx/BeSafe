@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 public class PreferencesActivity extends AppCompatActivity {
 
-    DatabaseHelper databaseHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        databaseHelper=new DatabaseHelper(getApplicationContext());
+
        // setContentView(R.layout.activity_preferences);
         SharedPreferences sharedPreferences;
 
@@ -35,17 +35,6 @@ public class PreferencesActivity extends AppCompatActivity {
            startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
             finish();
         }
-
-//        ArrayList<String> contactList=databaseHelper.readContacts();
-//        if(contactList.size()==0){
-//            startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
-//        }
-//        else{
-//
-//            //finish(); this activity would be finished
-//            Toast.makeText(this, "Go To Main Activity", Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
-//        }
 
 
     }
