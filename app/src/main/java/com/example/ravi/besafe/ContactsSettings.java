@@ -8,6 +8,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,9 @@ public class ContactsSettings extends AppCompatActivity {
     EditText et_contact;
     TextView tv_contacts;
     DatabaseHelper databaseHelper;
+    ListView lv_contacts;
+    ArrayList<String> contactsList;
+    ContactsListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +31,28 @@ public class ContactsSettings extends AppCompatActivity {
 
         databaseHelper=new DatabaseHelper(ContactsSettings.this);
         btn_add=findViewById(R.id.btn_addContact);
-        btn_delete=findViewById(R.id.btn_deleteContact);
+       // btn_delete=findViewById(R.id.btn_deleteContact);
         et_contact=findViewById(R.id.et_contact);
-        tv_contacts=findViewById(R.id.tv_contacts);
-        tv_contacts.setMovementMethod(new ScrollingMovementMethod());
+//        tv_contacts=findViewById(R.id.tv_contacts);
+//        tv_contacts.setMovementMethod(new ScrollingMovementMethod());
+        lv_contacts=findViewById(R.id.list1);
+        if(databaseHelper.readContacts().size()>0){
+            contactsList=databaseHelper.readContacts();
+            listAdapter=new ContactsListAdapter(ContactsSettings.this,contactsList);
+            lv_contacts.setAdapter(listAdapter);
+        }else{
+            contactsList=new ArrayList<>();
+        }
 
 
 
 
 
 
-        refreshTextView();
+
+
+       //
+        // refreshTextView();
         btn_add.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -59,7 +74,10 @@ public class ContactsSettings extends AppCompatActivity {
                     }
 
                     if(databaseHelper.insertContact(number)){
-                        refreshTextView();
+                        //refreshTextView();
+                        contactsList.add(number);
+                        listAdapter=new ContactsListAdapter(ContactsSettings.this,contactsList);
+                        lv_contacts.setAdapter(listAdapter);
                         et_contact.setText("");
                         Toast.makeText(ContactsSettings.this, ""+getString(R.string.insert_success), Toast.LENGTH_SHORT).show();
 
@@ -75,50 +93,50 @@ public class ContactsSettings extends AppCompatActivity {
         });
 
 
-        btn_delete.setOnClickListener(new View.OnClickListener() {
-
-
-
-            @Override
-            public void onClick(View view) {
-
-                String number=et_contact.getText().toString();
-
-                if(TextUtils.isEmpty(number)){
-                    et_contact.setError(getString(R.string.empty_number));
-                    et_contact.requestFocus();
-                    return;
-
-                }
-
-                if(number.length()!=10){
-                    et_contact.setError(getString(R.string.invalid_number));
-                    et_contact.requestFocus();
-                    return;
-                }
-
-
-                if(databaseHelper.deleteContact(number)){
-                    refreshTextView();
-                    et_contact.setText("");
-                    Toast.makeText(ContactsSettings.this, ""+getString(R.string.delete_success), Toast.LENGTH_SHORT).show();
-                    }
-                else{
-                    Toast.makeText(ContactsSettings.this, ""+getString(R.string.delete_failure), Toast.LENGTH_SHORT).show();
-                    }
-            }
-        });
-
-    }
-
-    void refreshTextView(){
-
-        tv_contacts.setText("");
-        ArrayList<String> contactsList= databaseHelper.readContacts();
-
-        for(String contact:contactsList){
-            tv_contacts.append(contact+"\n\n");
-        }
+//        btn_delete.setOnClickListener(new View.OnClickListener() {
+//
+//
+//
+//            @Override
+//            public void onClick(View view) {
+//
+//                String number=et_contact.getText().toString();
+//
+//                if(TextUtils.isEmpty(number)){
+//                    et_contact.setError(getString(R.string.empty_number));
+//                    et_contact.requestFocus();
+//                    return;
+//
+//                }
+//
+//                if(number.length()!=10){
+//                    et_contact.setError(getString(R.string.invalid_number));
+//                    et_contact.requestFocus();
+//                    return;
+//                }
+//
+//
+//                if(databaseHelper.deleteContact(number)){
+//                    refreshTextView();
+//                    et_contact.setText("");
+//                    Toast.makeText(ContactsSettings.this, ""+getString(R.string.delete_success), Toast.LENGTH_SHORT).show();
+//                    }
+//                else{
+//                    Toast.makeText(ContactsSettings.this, ""+getString(R.string.delete_failure), Toast.LENGTH_SHORT).show();
+//                    }
+//            }
+//        });
 
     }
+
+//    void refreshTextView(){
+//
+//        tv_contacts.setText("");
+//        ArrayList<String> contactsList= databaseHelper.readContacts();
+//
+//        for(String contact:contactsList){
+//            tv_contacts.append(contact+"\n\n");
+//        }
+//
+//    }
 }
