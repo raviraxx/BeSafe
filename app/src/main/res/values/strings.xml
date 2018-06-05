@@ -1,3 +1,15 @@
 <resources>
+
     <string name="app_name">BeSafe</string>
+    <string name="et_contactno">Contact Number</string>
+    <string name="btn_addContact">add contact</string>
+    <string name="btn_deleteContact">delete contact</string>
+    <string name="empty_number">Empty Number</string>
+    <string name="invalid_number">Invalid Number</string>
+    <string name="insert_success">Contact Inserted</string>
+    <string name="insert_failure">Error While Inserting </string>
+    <string name="delete_success">Contact Deleted</string>
+    <string name="delete_failure">Error While deleting</string>
+    <string name="btn_intent_mainActivity">Main Activity</string>
+
 </resources>
