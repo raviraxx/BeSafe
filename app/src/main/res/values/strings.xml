@@ -21,5 +21,7 @@
     <string name="delete_success">Contact Deleted</string>
     <string name="delete_failure">Error While deleting</string>
     <string name="btn_intent_mainActivity">Main Activity</string>
+    <string name="con_msg">Enter numbers you want to notify when in danger!</string>
+    <string name="savee">Go inside</string>
 
 </resources>

@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#c31432</color>
     <color name="colorPrimaryDark">#fd264b</color>
-    <color name="colorAccent">#fff240</color>
+    <color name="colorAccent">#000</color>
 
     <color name="color_dark_material_bold">#D81B60</color>
     <color name="color_primary_dark">#C2185B</color>
@@ -12,4 +12,9 @@
 
     <color name="color_custom_fragment_2">#3F51B5</color>
     <color name="color_dark_material_metaphor">#0277BD</color>
+    <color name="black">#000</color>
+    <color name="conA">#6dd5ed</color>
+
+    <color name="btn">#0277BD</color>
+    <color name="btnNotPressed">#019e1b</color>
 </resources>
