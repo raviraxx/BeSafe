@@ -24,9 +24,12 @@
     <string name="con_msg">Enter numbers you want to notify when in danger!</string>
     <string name="savee">Go inside</string>
     <string name="mmm"><u> Added Contacts:</u></string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">BeSafe</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_youtube">Self Defence Videos</string>
+    <string name="bg_service">Start Service</string>
+    <string name="cgnum">Change Number</string>
 
 </resources>
