@@ -29,6 +29,12 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/xyz"></activity>
+        <receiver android:name=".BroadCst">
+            <intent-filter>
+                <action android:name="android.media.VOLUME_CHANGED_ACTION"/>
+            </intent-filter>
+        </receiver>
+        <service android:name=".ExampSer"/>
     </application>
 
 </manifest>

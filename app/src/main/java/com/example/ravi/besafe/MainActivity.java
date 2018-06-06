@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
-        if(id==R.id.settings_start_service)
+        if(id==R.id.settings_stop_service)
         {
-            Toast.makeText(this, "Start Service", Toast.LENGTH_SHORT).show();
+            stopService(new Intent(getApplicationContext(),ExampSer.class));
             return true;
         }
         if(id==R.id.settings_change_number)

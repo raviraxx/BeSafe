@@ -15,6 +15,7 @@
     <color name="black">#000</color>
     <color name="conA">#6dd5ed</color>
 
+    <color name="light">#d6d6d6</color>
     <color name="btn">#0277BD</color>
     <color name="btnNotPressed">#019e1b</color>
 </resources>
