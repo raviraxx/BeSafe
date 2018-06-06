@@ -21,11 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ContactsSettings"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
-        <activity android:name=".OnBoardingWithPer"></activity>
+        <activity
+            android:name=".ContactsSettings"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".OnBoardingWithPer" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/xyz"></activity>
     </application>
 
 </manifest>

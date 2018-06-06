@@ -144,6 +144,7 @@
         android:layout_below="@+id/btn_addContact"
         android:textSize="16sp"
         android:text="@string/savee"
+        android:onClick="gotoNext"
         android:layout_margin="5dp"
         android:background="@drawable/btn_file"
         android:layout_width="match_parent"

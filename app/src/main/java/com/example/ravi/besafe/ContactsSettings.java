@@ -134,6 +134,11 @@ public class ContactsSettings extends AppCompatActivity {
 
     }
 
+    public void gotoNext(View view) {
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
+    }
+
 //    void refreshTextView(){
 //
 //        tv_contacts.setText("");

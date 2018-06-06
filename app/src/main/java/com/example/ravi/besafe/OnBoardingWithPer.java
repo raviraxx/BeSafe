@@ -76,7 +76,7 @@ public class OnBoardingWithPer extends IntroActivity {
                 .title(R.string.title5)
                 .description(R.string.des)
                 .image(R.drawable.ic_launcher_background)
-                .background(R.color.colorAccent)
+                .background(R.color.color_dark_material_metaphor)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .scrollable(false)
                 .canGoForward(false)
@@ -95,7 +95,8 @@ public class OnBoardingWithPer extends IntroActivity {
 
                             //finish(); this activity would be finished
                             //Toast.makeText(this, "Go To Main Activity", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                           startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                           finish();
                         }
 
 
