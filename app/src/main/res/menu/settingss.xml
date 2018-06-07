@@ -2,16 +2,22 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <item
-    android:id="@+id/settings_stop_service"
+    android:id="@+id/settings_start_service"
     android:title="@string/bg_service"
     app:showAsAction="never"
     android:orderInCategory="100"/>
+    <!--<item-->
+    <!--android:id="@+id/settings_stop_service"-->
+    <!--android:title="@string/bg_service_stop"-->
+    <!--app:showAsAction="never"-->
+    <!--android:orderInCategory="101"/>-->
+
 
     <item
 
         android:id="@+id/settings_change_number"
         android:title="@string/cgnum"
-        android:orderInCategory="100"
+        android:orderInCategory="102"
         app:showAsAction="never" />
 
 </menu>

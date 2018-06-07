@@ -29,7 +29,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_youtube">Self Defence Videos</string>
-    <string name="bg_service">Stop Service</string>
+    <string name="bg_service">Start Service</string>
     <string name="cgnum">Change Number</string>
+    <string name="bg_service_stop">Stop Service</string>
 
 </resources>

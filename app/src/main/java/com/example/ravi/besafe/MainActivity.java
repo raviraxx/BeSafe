@@ -1,5 +1,6 @@
 package com.example.ravi.besafe;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+       // ActivityManager manager=(ActivityManager)getSystemService(ACTIVITY_SERVICE);
+
     }
 
 
@@ -51,23 +54,73 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settingss,menu);
+
         return true;
     }
+
+    public boolean isRunning()
+    {
+        ActivityManager manager=(ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for(ActivityManager.RunningServiceInfo serviceInfo:manager.getRunningServices(Integer.MAX_VALUE))
+        {
+            if("com.example.ravi.besafe.ExampSer".equals(serviceInfo.service.getClassName()))
+            {
+
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
-        if(id==R.id.settings_stop_service)
+
+        if(id==R.id.settings_start_service)
         {
-            stopService(new Intent(getApplicationContext(),ExampSer.class));
+
             return true;
         }
         if(id==R.id.settings_change_number)
         {
             startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
+
+            menu.getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+
+                    if (isRunning()) {
+                        Intent in = new Intent(getApplicationContext(), ExampSer.class);
+                        in.putExtra("ser", "stop");
+                        Toast.makeText(MainActivity.this, "stop hoja", Toast.LENGTH_SHORT).show();
+                        menu.getItem(0).setTitle("Start Service");
+                        stopService(in);
+                    } else {
+                        Intent in1 = new Intent(getApplicationContext(), ExampSer.class);
+                        in1.putExtra("ser", "start");
+                        Toast.makeText(MainActivity.this, "start hoja", Toast.LENGTH_SHORT).show();
+                        menu.getItem(0).setTitle("Stop Service");
+                        startService(in1);
+                    }
+
+
+                    return false;
+                }
+            });
+
+        return super.onPrepareOptionsMenu(menu);
+    }
 }
+
