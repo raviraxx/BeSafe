@@ -34,5 +34,8 @@
     <string name="btn_dangerText">i am in danger</string>
     <string name="btn_safeText">i am safe now</string>
     <string name="toast_message">message sent</string>
+    <string name="gps_network_not_enabled">GPS NOT ENABLED</string>
+    <string name="open_location_settings">OPEN LOCATION SETTINGS</string>
+    <string name="Cancel">Cancel</string>
 
 </resources>

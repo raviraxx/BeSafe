@@ -2,6 +2,7 @@ package com.example.ravi.besafe;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,12 +11,14 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +45,11 @@ public class LocationFragment extends Fragment {
     LocationListener locationListener;
     Double latitude = 0.0;
     Double longitude = 0.0;
+    Double oldlatitude=0.0;
+    Double oldlongitude=0.0;
+
+    int smsCounter=0;
+    boolean locationFlag=false;
     public static final int PERMISSION_REQUEST = 1000;
     public static final int GPS_REQUEST = 2000;
     boolean inDanger = false;
@@ -52,6 +60,7 @@ public class LocationFragment extends Fragment {
     String coordinates;
     Button btn_alert;
     TextView tv_location;
+    boolean runThread=false;
 
 
     public LocationFragment() {
@@ -60,6 +69,7 @@ public class LocationFragment extends Fragment {
     public LocationFragment(Context context) {
         this.context = context;
     }
+
 
     @Nullable
     @Override
@@ -81,6 +91,8 @@ public class LocationFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Thread locationThread=new Thread(new locationRunnable());
+        locationThread.start();
 
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -146,13 +158,15 @@ public class LocationFragment extends Fragment {
                     if(inDanger){
 
                         btn_alert.setText(getString(R.string.btn_safeText));
+                        btn_alert.setBackgroundResource(R.drawable.safe_btn);
                         printaddress(latitude,longitude);
 
 
                     }else{
                         btn_alert.setText(getString(R.string.btn_dangerText));
-                        String message=getString(R.string.btn_safeText)+tv_location.getText().toString();
-                        sendSMS(message);
+                        String message=getString(R.string.btn_safeText)+"\n"+tv_location.getText().toString();
+                        btn_alert.setBackgroundResource(R.drawable.danger_btn);
+                        sendSafeSMS(message);
 
                     }
 
@@ -176,7 +190,7 @@ public class LocationFragment extends Fragment {
             tv_location.append(coordinates);
             if(inDanger){
 
-                String message=getString(R.string.btn_dangerText)+tv_location.getText().toString();
+                String message=getString(R.string.btn_dangerText)+"\n"+tv_location.getText().toString();
                 //smsManager.sendTextMessage("8291565088",null,message,null,null);
                 sendSMS(message);
             }
@@ -195,23 +209,51 @@ public class LocationFragment extends Fragment {
     public void sendSMS(String message){
 
         //Cursor cursor=databaseHelper.viewData();
-        List<String> contactsList=databaseHelper.readContacts();
+        if(smsCounter%5==0) {
 
-        if(contactsList.size()>0){
 
-            //StringBuffer stringBuffer=new StringBuffer();
-            for(String contact : contactsList){
+            List<String> contactsList = databaseHelper.readContacts();
 
-                //String contact=cursor.getString(1);
-                smsManager.sendTextMessage(contact,null, message,null,null);
+            if (contactsList.size() > 0) {
+
+                //StringBuffer stringBuffer=new StringBuffer();
+                for (String contact : contactsList) {
+
+                    //String contact=cursor.getString(1);
+                    smsManager.sendTextMessage(contact, null, message, null, null);
+                }
+                //Toast.makeText(this, "Location Shared", Toast.LENGTH_SHORT).show();
+
+
             }
-            //Toast.makeText(this, "Location Shared", Toast.LENGTH_SHORT).show();
-
-
-
         }
+        smsCounter++;
 
     }
+
+
+    public void sendSafeSMS(String message){
+
+        //Cursor cursor=databaseHelper.viewData();
+        List<String> contactsList = databaseHelper.readContacts();
+
+            if (contactsList.size() > 0) {
+
+                //StringBuffer stringBuffer=new StringBuffer();
+                for (String contact : contactsList) {
+
+                    //String contact=cursor.getString(1);
+                    smsManager.sendTextMessage(contact, null, message, null, null);
+                }
+                //Toast.makeText(this, "Location Shared", Toast.LENGTH_SHORT).show();
+
+
+            }
+
+       // smsCounter++;
+
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -268,4 +310,68 @@ public class LocationFragment extends Fragment {
 
         }
     }
+
+    class locationRunnable implements Runnable{
+        @Override
+        public void run() {
+
+
+            while (runThread) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                    boolean gps_enabled = false;
+                    boolean network_enabled = false;
+
+                    try {
+                        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                    }
+                    catch (Exception ex) {
+                    }
+
+                    try {
+                        network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                    } catch (Exception ex) {
+                    }
+
+                    if (!gps_enabled && !network_enabled) {
+                        // notify user
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                        dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
+                        dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                // TODO Auto-generated method stub
+                                Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                context.startActivity(myIntent);
+                                //get gps
+                            }
+                        });
+//                        dialog.setNegativeButton(context.getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+//                                // TODO Auto-generated method stub
+//
+//                            }
+//                        });
+                        dialog.show();
+                    }
+
+                }
+
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+    };
+
+
+
 }

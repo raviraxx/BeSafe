@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#c31432</color>
     <color name="colorPrimaryDark">#fd264b</color>
+    <color name="colorrimaryDark">#ff637e</color>
     <color name="colorAccent">#000</color>
 
     <color name="color_dark_material_bold">#D81B60</color>
@@ -18,4 +19,5 @@
     <color name="light">#d6d6d6</color>
     <color name="btn">#0277BD</color>
     <color name="btnNotPressed">#019e1b</color>
+    <color name="btnNtPressed">#21f243</color>
 </resources>
