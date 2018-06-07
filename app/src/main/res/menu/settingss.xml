@@ -4,7 +4,8 @@
 <item
     android:id="@+id/settings_start_service"
     android:title="@string/bg_service"
-    app:showAsAction="never"
+    app:showAsAction="always"
+    android:icon="@drawable/ic_play_circle_outline_black_24dp"
     android:orderInCategory="100"/>
     <!--<item-->
     <!--android:id="@+id/settings_stop_service"-->
@@ -17,7 +18,8 @@
 
         android:id="@+id/settings_change_number"
         android:title="@string/cgnum"
+        android:icon="@drawable/ic_contact_phone_black_24dp"
         android:orderInCategory="102"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 
 </menu>

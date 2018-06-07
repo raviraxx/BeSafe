@@ -63,7 +63,7 @@ public class OnBoardingWithPer extends IntroActivity {
                     .backgroundDark(R.color.color_custom_fragment_2)
                     .scrollable(false)
                     .permissions(new String[]{Manifest.permission.CALL_PHONE,
-                            Manifest.permission.SEND_SMS,Manifest.permission.ACCESS_COARSE_LOCATION})
+                            Manifest.permission.SEND_SMS,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.READ_CONTACTS})
 
                     .build();
             addSlide(permissionsSlide);

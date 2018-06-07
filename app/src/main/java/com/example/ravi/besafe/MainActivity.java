@@ -101,12 +101,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
                     if (isRunning()) {
                         menu.getItem(0).setTitle("Start Service");
+                        menu.getItem(0).setIcon(R.drawable.ic_play_circle_outline_black_24dp);
                         stopService(new Intent(getApplication(),ExampSer.class));
-                    } else {
+                    }
+                    else {
                         menu.getItem(0).setTitle("Stop Service");
+                        menu.getItem(0).setIcon(R.drawable.ic_play_circle_filled_black_24dp);
                         startService(new Intent(getApplicationContext(), ExampSer.class));
                     }
-
 
                     return false;
                 }
