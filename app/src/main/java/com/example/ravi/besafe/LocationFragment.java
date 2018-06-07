@@ -13,6 +13,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,7 +42,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class LocationFragment extends Fragment {
 
-
+//Todo Add sms cost and description (feature) in onboardng
     Context context;
     LocationManager locationManager;
     LocationListener locationListener;
@@ -47,6 +50,8 @@ public class LocationFragment extends Fragment {
     Double longitude = 0.0;
     Double oldlatitude=0.0;
     Double oldlongitude=0.0;
+
+    long oldTime=0;
 
     int smsCounter=0;
     boolean locationFlag=false;
@@ -91,60 +96,15 @@ public class LocationFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        runThread=true;
         Thread locationThread=new Thread(new locationRunnable());
         locationThread.start();
 
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS}, PERMISSION_REQUEST);
-            return;
-        }
-        Location tempLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (tempLocation != null) {
-            latitude = tempLocation.getLatitude();
-            longitude = tempLocation.getLongitude();
-            printaddress(latitude, longitude);
-        }
 
 
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-                if(inDanger)
-                printaddress(latitude, longitude);
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivityForResult(intent, GPS_REQUEST);
-
-            }
-        };
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
-
+        handleLocationUpdates();
 
         btn_alert.setOnClickListener(new View.OnClickListener() {
 
@@ -179,6 +139,65 @@ public class LocationFragment extends Fragment {
 
     }
 
+    private void handleLocationUpdates() {
+
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS}, PERMISSION_REQUEST);
+            return;
+        }
+        Location tempLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (tempLocation != null) {
+            latitude = tempLocation.getLatitude();
+            longitude = tempLocation.getLongitude();
+            printaddress(latitude, longitude);
+        }
+
+
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                printaddress(latitude, longitude);
+
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+                if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivityForResult(intent, GPS_REQUEST);
+                }
+
+            }
+        };
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
+
+
+
+
+    }
+
     public void printaddress(double latitude, double longitude){
         try {
             geocoder=new Geocoder(context, Locale.getDefault());
@@ -209,8 +228,10 @@ public class LocationFragment extends Fragment {
     public void sendSMS(String message){
 
         //Cursor cursor=databaseHelper.viewData();
-        if(smsCounter%5==0) {
+        long newTime= Calendar.getInstance().getTimeInMillis();
+        if(newTime-oldTime >= 3000) {
 
+            oldTime=newTime;
 
             List<String> contactsList = databaseHelper.readContacts();
 
@@ -227,7 +248,7 @@ public class LocationFragment extends Fragment {
 
             }
         }
-        smsCounter++;
+
 
     }
 
@@ -309,7 +330,61 @@ public class LocationFragment extends Fragment {
 
 
         }
+
+        if(requestCode==50){
+            runThread=true;
+            if(resultCode==RESULT_OK){
+                handleLocationUpdates();
+            }
+        }
     }
+
+    void createDialog(){
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
+        dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                // TODO Auto-generated method stub
+                Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(myIntent,50);
+                //get gps
+            }
+        });
+//                        dialog.setNegativeButton(context.getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+//                                // TODO Auto-generated method stub
+//
+//                            }
+//                        });
+        dialog.show();
+
+
+
+    }
+
+
+    Handler handler=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message message) {
+
+            switch (message.what){
+
+                case 10:createDialog();
+                        return true;
+
+
+            }
+
+
+
+
+            return false;
+        }
+    });
 
     class locationRunnable implements Runnable{
         @Override
@@ -337,32 +412,17 @@ public class LocationFragment extends Fragment {
 
                     if (!gps_enabled && !network_enabled) {
                         // notify user
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                        dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
-                        dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                                // TODO Auto-generated method stub
-                                Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                context.startActivity(myIntent);
-                                //get gps
-                            }
-                        });
-//                        dialog.setNegativeButton(context.getString(R.string.Cancel), new DialogInterface.OnClickListener() {
-//
-//                            @Override
-//                            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-//                                // TODO Auto-generated method stub
-//
-//                            }
-//                        });
-                        dialog.show();
+                      // createDialog();
+                        Message message=Message.obtain();
+                        message.what=10;
+                        handler.sendMessage(message);
+                        runThread=false;
                     }
 
                 }
 
                 try {
-                    Thread.sleep(600);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

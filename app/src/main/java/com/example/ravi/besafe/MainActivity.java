@@ -2,6 +2,7 @@ package com.example.ravi.besafe;
 
 import android.app.ActivityManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    //Todo Add Volume Rockers description in OnBoarding
+    //Todo Add Network Check in Videos fragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         navigation.setOnNavigationItemSelectedListener(this);
         loadFragment(new LocationFragment(MainActivity.this));
        // ActivityManager manager=(ActivityManager)getSystemService(ACTIVITY_SERVICE);
-
+        SharedPreferences sharedPreferences=getSharedPreferences("firstTime",0);
+        //boolean first//
     }
 
 
