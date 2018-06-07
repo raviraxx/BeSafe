@@ -313,7 +313,7 @@ public class LocationFragment extends Fragment {
 
     class locationRunnable implements Runnable{
         @Override
-        public void run() {
+        public synchronized void run() {
 
 
             while (runThread) {
@@ -362,7 +362,7 @@ public class LocationFragment extends Fragment {
                 }
 
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(600);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
