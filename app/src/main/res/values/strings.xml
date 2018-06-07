@@ -31,6 +31,8 @@
     <string name="title_youtube">Self Defence Videos</string>
     <string name="bg_service">Start Service</string>
     <string name="cgnum">Change Number</string>
-    <string name="bg_service_stop">Stop Service</string>
+    <string name="btn_dangerText">i am in danger</string>
+    <string name="btn_safeText">i am safe now</string>
+    <string name="toast_message">message sent</string>
 
 </resources>

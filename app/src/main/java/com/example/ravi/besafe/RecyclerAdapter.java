@@ -34,24 +34,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(final RecyclerAdapter.ViewHolder holder, final int position) {
 
-        final YouTubeThumbnailLoader.OnThumbnailLoadedListener onThumbnailLoadedListener=new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
-            @Override
-            public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
-            youTubeThumbnailView.setVisibility(View.VISIBLE);
-            holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
-            }
+//        final YouTubeThumbnailLoader.OnThumbnailLoadedListener onThumbnailLoadedListener=new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
+//            @Override
+//            public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
+//            youTubeThumbnailView.setVisibility(View.VISIBLE);
+//            holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
+//            }
+//
+//            @Override
+//            public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
+//
+//            }
+//        };
 
-            @Override
-            public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
-
-            }
-        };
-
-        holder.youTubeThumbnailView.initialize("", new YouTubeThumbnailView.OnInitializedListener() {
+        holder.youTubeThumbnailView.initialize("AIzaSyDbWv-CuiV9DcBoOhDtORRruGGHp0RN72M", new YouTubeThumbnailView.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader youTubeThumbnailLoader) {
                 youTubeThumbnailLoader.setVideo(VideoID[position]);
-                youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
+
+            //    youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
             }
 
             @Override
@@ -85,7 +86,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         @Override
         public void onClick(View v) {
 
-            Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) ctx,"" , VideoID[getLayoutPosition()]);
+            Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) ctx,"AIzaSyDbWv-CuiV9DcBoOhDtORRruGGHp0RN72M" , VideoID[getLayoutPosition()]);
             ctx.startActivity(intent);
         }
     }
