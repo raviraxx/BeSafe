@@ -32,7 +32,14 @@ public class PreferencesActivity extends AppCompatActivity {
         }
 
         else{
-           startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+
+            if(new DatabaseHelper(PreferencesActivity.this).readContacts().size()>0){
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
+            }else {
+                startActivity(new Intent(getApplicationContext(), ContactsSettings.class));
+
+            }
             finish();
         }
 

@@ -95,14 +95,15 @@ public class OnBoardingWithPer extends IntroActivity {
 
                             //finish(); this activity would be finished
                             //Toast.makeText(this, "Go To Main Activity", Toast.LENGTH_SHORT).show();
+
                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
                            finish();
                         }
 
 
 
-                        startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
-                        finish();
+//                        startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+//                        finish();
                     }
                 })
                 .build());

@@ -20,8 +20,8 @@ import static com.example.ravi.besafe.App.Channel_id;
  */
 
 public class ExampSer extends Service {
-    String number="7775999217";
-
+    String number;
+//db se lena
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -31,6 +31,7 @@ public class ExampSer extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        number=new DatabaseHelper(ExampSer.this).readContacts().get(0);
     }
 
     @Override
@@ -41,7 +42,9 @@ public class ExampSer extends Service {
         }
         else{
             String dial = "tel:"+number;
-            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+            Intent i=new Intent(Intent.ACTION_CALL, Uri.parse(dial));
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
         }
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
         if (intent.getStringExtra("data") != null)
@@ -61,8 +64,10 @@ public class ExampSer extends Service {
                 //.setContentText("Example")
                 .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                 .setContentIntent(contentIntent)
+                .setAutoCancel(true)
 //                .addAction(R.mipmap.ic_launcher,"Stop Service",sservice)
                 .build();
+
         startForeground(1,notification);
 
         return START_STICKY;

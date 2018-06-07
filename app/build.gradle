@@ -32,5 +32,8 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
     implementation 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.stone.vega.library:VegaLayoutManager:1.0.6'
+    implementation 'com.stone.vega.library:VegaLayoutManager:1.0.6'
+    implementation 'com.github.broakenmedia:MultiContactPicker:1.7'
+
+
 }

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+        loadFragment(new LocationFragment(MainActivity.this));
        // ActivityManager manager=(ActivityManager)getSystemService(ACTIVITY_SERVICE);
 
     }
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         switch (item.getItemId())
         {
-            case R.id.navigation_home: fragment=new LocationFragment();break;
+            case R.id.navigation_home: fragment=new LocationFragment(MainActivity.this);break;
             case R.id.navigation_dashboard: fragment=new VideoFragment();break;
         }
 
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settingss,menu);
-
         return true;
     }
 
