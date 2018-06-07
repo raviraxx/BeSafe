@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
@@ -102,17 +100,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 public boolean onMenuItemClick(MenuItem menuItem) {
 
                     if (isRunning()) {
-                        Intent in = new Intent(getApplicationContext(), ExampSer.class);
-                        in.putExtra("ser", "stop");
-                        Toast.makeText(MainActivity.this, "stop hoja", Toast.LENGTH_SHORT).show();
                         menu.getItem(0).setTitle("Start Service");
-                        stopService(in);
+                        stopService(new Intent(getApplication(),ExampSer.class));
                     } else {
-                        Intent in1 = new Intent(getApplicationContext(), ExampSer.class);
-                        in1.putExtra("ser", "start");
-                        Toast.makeText(MainActivity.this, "start hoja", Toast.LENGTH_SHORT).show();
                         menu.getItem(0).setTitle("Stop Service");
-                        startService(in1);
+                        startService(new Intent(getApplicationContext(), ExampSer.class));
                     }
 
 
