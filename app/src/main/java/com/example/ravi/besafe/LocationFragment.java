@@ -408,13 +408,13 @@ public class LocationFragment extends Fragment {
     class locationRunnable implements Runnable{
         @Override
         public synchronized void run() {
-            Message message=Message.obtain();
+
 
             while (runThread) {
 
-
-                    message.what=11;
-                    handler.sendMessage(message);
+                Message threadMessage=Message.obtain();
+                    threadMessage.what=11;
+                    handler.sendMessage(threadMessage);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                     LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -435,7 +435,7 @@ public class LocationFragment extends Fragment {
                     if (!gps_enabled && !network_enabled) {
                         // notify user
                       // createDialog();
-
+                        Message message=Message.obtain();
                         message.what=10;
                         handler.sendMessage(message);
                         runThread=false;
