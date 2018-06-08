@@ -156,7 +156,7 @@ public class ContactsSettings extends AppCompatActivity {
     public void onBackPressed() {
 
         if(databaseHelper.readContacts().size()>0){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
             super.onBackPressed();
 
         }else{
