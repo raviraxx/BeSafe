@@ -25,6 +25,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -209,16 +210,21 @@ public class LocationFragment extends Fragment {
     }
 
     public void printaddress(double latitude, double longitude){
-        try {
-            geocoder=new Geocoder(context, Locale.getDefault());
 
-            if(latitude>0.0 && longitude>0.0) {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                String address = addresses.get(0).getAddressLine(0);
 
-                tv_location.setText(address);
-                coordinates = "\n\nLatitude-> " + latitude + "\nLongitude->" + longitude;
-                tv_location.append(coordinates);
+
+            if(latitude>0.0 && longitude>0.0)  {
+                try {
+                    geocoder=new Geocoder(context, Locale.getDefault());
+                    addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                    String address = addresses.get(0).getAddressLine(0);
+
+                    tv_location.setText(address);
+                    coordinates = "\n\nLatitude-> " + latitude + "\nLongitude->" + longitude;
+                    tv_location.append(coordinates);
+                }catch (Exception e){
+                    Log.d("ioException",e.getMessage());
+                }
             }
             if(inDanger){
 
@@ -227,12 +233,9 @@ public class LocationFragment extends Fragment {
                 sendSMS(message);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
 
-    }
 
 //    public void requestLocationUpdates(){
 //        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
@@ -356,7 +359,7 @@ public class LocationFragment extends Fragment {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
-        dialog.setCancelable(false);
+        //dialog.setCancelable(false);
         dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
