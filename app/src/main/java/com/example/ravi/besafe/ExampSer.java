@@ -45,13 +45,6 @@ public class ExampSer extends Service {
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         }
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
-        if (intent.getStringExtra("data") != null)
-        {
-            String str=intent.getStringExtra("data");//get data here sended from BroadcastReceiver
-            Toast.makeText(this, ""+str, Toast.LENGTH_SHORT).show();
-        }
-
 
         return START_STICKY;
     }
