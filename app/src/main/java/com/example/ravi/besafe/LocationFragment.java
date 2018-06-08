@@ -1,6 +1,7 @@
 package com.example.ravi.besafe;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -70,22 +71,19 @@ public class LocationFragment extends Fragment {
     Button btn_alert;
     TextView tv_location;
     boolean runThread=false;
-    MainActivity activity;
+    Activity activity;
 
 
     public LocationFragment() {
     }
 
-    public LocationFragment(Context context,MainActivity activity) {
-        this.context = context;
-        this.activity=activity;
-    }
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.location_fragment, null);
+        context=container.getContext();
+        activity= (Activity) context;
+
 
 
         return view;
