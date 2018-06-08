@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Address;
@@ -20,6 +21,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
@@ -29,10 +32,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -66,13 +75,15 @@ public class LocationFragment extends Fragment {
     Button btn_alert;
     TextView tv_location;
     boolean runThread=false;
+    MainActivity activity;
 
 
     public LocationFragment() {
     }
 
-    public LocationFragment(Context context) {
+    public LocationFragment(Context context,MainActivity activity) {
         this.context = context;
+        this.activity=activity;
     }
 
 
@@ -91,6 +102,7 @@ public class LocationFragment extends Fragment {
         tv_location=view.findViewById(R.id.tv_location);
         databaseHelper=new DatabaseHelper(context);
         smsManager = SmsManager.getDefault();
+
     }
 
     @Override
@@ -99,6 +111,7 @@ public class LocationFragment extends Fragment {
         runThread=true;
         Thread locationThread=new Thread(new locationRunnable());
         locationThread.start();
+
 
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -373,8 +386,14 @@ public class LocationFragment extends Fragment {
 
             switch (message.what){
 
-                case 10:createDialog();
+                case 10:
+                    Toast.makeText(context, "creating dialog", Toast.LENGTH_SHORT).show();
+                        createDialog();
                         return true;
+
+                case 11:
+                    Toast.makeText(context, "Thread started", Toast.LENGTH_SHORT).show();
+                    return true;
 
 
             }
@@ -389,10 +408,13 @@ public class LocationFragment extends Fragment {
     class locationRunnable implements Runnable{
         @Override
         public synchronized void run() {
-
+            Message message=Message.obtain();
 
             while (runThread) {
 
+
+                    message.what=11;
+                    handler.sendMessage(message);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                     LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -413,7 +435,7 @@ public class LocationFragment extends Fragment {
                     if (!gps_enabled && !network_enabled) {
                         // notify user
                       // createDialog();
-                        Message message=Message.obtain();
+
                         message.what=10;
                         handler.sendMessage(message);
                         runThread=false;

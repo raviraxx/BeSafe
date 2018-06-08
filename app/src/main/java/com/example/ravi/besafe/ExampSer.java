@@ -13,7 +13,6 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-import static com.example.ravi.besafe.App.Channel_id;
 
 /**
  * Created by ravi on 07-06-2018.
@@ -53,22 +52,22 @@ public class ExampSer extends Service {
             Toast.makeText(this, ""+str, Toast.LENGTH_SHORT).show();
         }
 
-        Intent activityIntent=new Intent(this,MainActivity.class);
-        PendingIntent contentIntent=PendingIntent.getActivity(this,0,activityIntent,0);
+        //Intent activityIntent=new Intent(this,MainActivity.class);
+        //PendingIntent contentIntent=PendingIntent.getActivity(this,0,activityIntent,0);
 
 
 //        Intent stopSer=new Intent(this,MainActivity.class);
 //        PendingIntent sservice=PendingIntent.getService()
 
-        Notification notification=new NotificationCompat.Builder(this,Channel_id).setContentTitle("BeSafe Service Running")
-                //.setContentText("Example")
-                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                .setContentIntent(contentIntent)
-                .setAutoCancel(true)
-//                .addAction(R.mipmap.ic_launcher,"Stop Service",sservice)
-                .build();
+//        Notification notification=new NotificationCompat.Builder(this,Channel_id).setContentTitle("BeSafe Service Running")
+//                //.setContentText("Example")
+//                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+//                .setContentIntent(contentIntent)
+//                .setAutoCancel(true)
+////                .addAction(R.mipmap.ic_launcher,"Stop Service",sservice)
+//                .build();
 
-        startForeground(1,notification);
+      //  startForeground(1,notification);
 
         return START_STICKY;
     }

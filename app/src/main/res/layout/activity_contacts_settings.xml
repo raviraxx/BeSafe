@@ -93,10 +93,27 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:padding="10dp"
+        android:gravity="center"
         android:fontFamily="monospace"
         android:background="@drawable/et_border"
         android:textColor="@color/color_custom_fragment_2"
         android:text="@string/con_msg" />
+
+ <TextView
+     android:id="@+id/tv9"
+     android:layout_below="@+id/textView4"
+     android:text="@string/newtxt"
+     android:textColor="@color/color_custom_fragment_2"
+     android:textSize="16sp"
+     android:textStyle="bold"
+     android:layout_margin="5dp"
+     android:gravity="center"
+     android:background="@drawable/et_border"
+     android:padding="10dp"
+     android:fontFamily="monospace"
+     android:layout_centerHorizontal="true"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content" />
 
 
 
@@ -106,7 +123,7 @@
         android:id="@+id/l1"
         android:layout_marginRight="3dp"
         android:layout_marginLeft="3dp"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/tv9"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

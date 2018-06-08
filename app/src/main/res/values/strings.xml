@@ -5,12 +5,12 @@
     <string name="title1">Welcome User</string>
     <string name="description_1">We are dedicated towards your safety!</string>
     <string name="title2">Watch Self Defence Videos</string>
-    <string name="description_2">Protect yourselves from any Kind of Dangerous stuation</string>
+    <string name="description_2">Train to Protect yourselves from any Kind of Dangerous situation</string>
     <string name="title3">Add Permissions</string>
-    <string name="description_3">Permissions are required to make this app work fluently</string>
+    <string name="description_3">Permissions are required to make this app work fluently(Do allow all permissions)</string>
     <string name="go">Ready to go Inside</string>
     <string name="title5">All Set to Go Inside</string>
-    <string name="des">Be Safe and Healthy</string>
+    <string name="des">Just One More thing: Try to keep your Gps Enabled</string>
     <string name="et_contactno">Contact Number</string>
     <string name="btn_addContact">add contact</string>
     <string name="btn_deleteContact">delete contact</string>
@@ -22,7 +22,7 @@
     <string name="delete_failure">Error While deleting</string>
     <string name="btn_intent_mainActivity">Main Activity</string>
     <string name="con_msg">Enter numbers you want to notify when in danger!</string>
-    <string name="savee">Go inside</string>
+    <string name="savee">Save</string>
     <string name="mmm"><u> Added Contacts:</u></string>
     <string name="title_activity_main">BeSafe</string>
     <string name="title_home">Home</string>
@@ -37,5 +37,8 @@
     <string name="gps_network_not_enabled">GPS NOT ENABLED</string>
     <string name="open_location_settings">OPEN LOCATION SETTINGS</string>
     <string name="Cancel">Cancel</string>
+    <string name="title9">Tips to use this App</string>
+    <string name="description_9">Press any Volume key for 3seconds to call your saved contact person</string>
+    <string name="newtxt">First Contact Displayed would always be used as Emergency Number</string>
 
 </resources>
