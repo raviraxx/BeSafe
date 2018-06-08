@@ -40,5 +40,6 @@
     <string name="title9">Tips to use this App</string>
     <string name="description_9">Press any Volume key for 3seconds to call your saved contact person</string>
     <string name="newtxt">First Contact Displayed would always be used as Emergency Number</string>
+    <string name="label_grant_permissions">Grant All Permissons</string>
 
 </resources>

@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.stone.vega.library.VegaLayoutManager;
+
 
 /**
  * Created by ravi on 06-06-2018.

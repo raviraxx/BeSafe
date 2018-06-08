@@ -3,12 +3,14 @@ package com.example.ravi.besafe;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
+import com.heinrichreimersoftware.materialintro.app.OnNavigationBlockedListener;
 import com.heinrichreimersoftware.materialintro.slide.SimpleSlide;
 import com.heinrichreimersoftware.materialintro.slide.Slide;
 
@@ -115,5 +117,20 @@ public class OnBoardingWithPer extends IntroActivity {
                     }
                 })
                 .build());
+
+        addOnNavigationBlockedListener(new OnNavigationBlockedListener() {
+            @Override
+            public void onNavigationBlocked(int position, int direction) {
+                View contentView = findViewById(android.R.id.content);
+                if (contentView != null) {
+                    Slide slide = getSlide(position);
+
+                    if (slide == permissionsSlide) {
+                        Snackbar.make(contentView, R.string.label_grant_permissions, Snackbar.LENGTH_LONG)
+                                .show();
+                    }
+                }
+            }
+        });
     }
 }

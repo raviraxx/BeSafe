@@ -41,7 +41,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
 
 import static android.app.Activity.RESULT_OK;
 
@@ -124,7 +124,7 @@ public class LocationFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(latitude>0.0 && longitude>0.0){
+                if((latitude>0.0 && longitude>0.0) || true){
 
                     inDanger=!inDanger;
 
@@ -356,6 +356,7 @@ public class LocationFragment extends Fragment {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
+        dialog.setCancelable(false);
         dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
