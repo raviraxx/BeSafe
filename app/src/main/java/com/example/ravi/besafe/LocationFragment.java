@@ -25,6 +25,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -232,7 +233,6 @@ public class LocationFragment extends Fragment {
                 sendSMS();
             }
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -361,7 +361,7 @@ public class LocationFragment extends Fragment {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
-        dialog.setCancelable(false);
+        //dialog.setCancelable(false);
         dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
