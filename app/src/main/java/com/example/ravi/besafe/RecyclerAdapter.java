@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
@@ -20,7 +22,20 @@ import com.google.android.youtube.player.YouTubeThumbnailView;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    String[] VideoID = {"aJi7EhqaY7Y", "J-dv_DcDD_A", "zDo0H8Fm7d0","M4ZoCHID9GI","k2qgadSvNyU"};
+    String[] VideoID = {"ORAOkP1h3R0",
+                        "T7aNSRoDCmg",
+                        "CKaa19kpqzM",
+                        "XARIQt1Z20M",
+                        "uGqfsYaUxYo",
+                        "Js-rWbzpd6M",
+                        "M4_8PoRQP8w",
+                        "jkvm13QYfpI",
+                        "Budz0f73Dws",
+                        "SAyn12l87-k",
+                        "Nkc8R_VtrAo",
+                        "2_HgPXgJ16I",
+                        "vX-OOfbnD9w","5cOtK3ZKIEw","ZwULI5wMtuY","1SRF-j9zjHM"
+                        };
     Context ctx;
     public RecyclerAdapter(Context context) {
         this.ctx = context;
@@ -44,22 +59,41 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 //            @Override
 //            public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
 //
+//                youTubeThumbnailView.release();
+//                Toast.makeText(ctx, "Thumbnail Error", Toast.LENGTH_SHORT).show();
+//                Log.d("ThumbNail Err:","Youtube_Thumbnail_Error");
 //            }
 //        };
 
         holder.youTubeThumbnailView.initialize("AIzaSyDbWv-CuiV9DcBoOhDtORRruGGHp0RN72M", new YouTubeThumbnailView.OnInitializedListener() {
             @Override
-            public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader youTubeThumbnailLoader) {
+            public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
                 youTubeThumbnailLoader.setVideo(VideoID[position]);
 
-            //    youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
-            }
+
+                youTubeThumbnailLoader.setOnThumbnailLoadedListener(new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
+                    @Override
+                    public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
+                        youTubeThumbnailView.setVisibility(View.VISIBLE);
+                        holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
+                       // youTubeThumbnailLoader.release();
+                    }
+
+                    @Override
+                    public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
+                      //  youTubeThumbnailLoader.release();
+                    }
+                });
+
+
+            }//onInitializeSuccess
 
             @Override
             public void onInitializationFailure(YouTubeThumbnailView youTubeThumbnailView, YouTubeInitializationResult youTubeInitializationResult) {
-
+                Toast.makeText(ctx, "Something Went Wrong!", Toast.LENGTH_SHORT).show();
+                Log.d("Youtube:","Youtube_error");
             }
-        });
+        });//end of initialize
 
 
     }
