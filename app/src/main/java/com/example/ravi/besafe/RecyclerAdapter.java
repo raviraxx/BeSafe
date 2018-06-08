@@ -22,15 +22,7 @@ import com.google.android.youtube.player.YouTubeThumbnailView;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-//    String[] VideoID = {"ORAOkP1h3R0",
-//                        "T7aNSRoDCmg",
-//                        "CKaa19kpqzM",
-//                        "SAyn12l87-k",
-//                        "Nkc8R_VtrAo",
-//                        "2_HgPXgJ16I",
-//
-//
-//                        };
+
 
      String[] VideoID = {
                         "T7aNSRoDCmg",
@@ -60,41 +52,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(final RecyclerAdapter.ViewHolder holder, final int position) {
 
-//        final YouTubeThumbnailLoader.OnThumbnailLoadedListener onThumbnailLoadedListener=new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
-//            @Override
-//            public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
-//            youTubeThumbnailView.setVisibility(View.VISIBLE);
-//            holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
-//            }
-//
-//            @Override
-//            public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
-//
-//                youTubeThumbnailView.release();
-//                Toast.makeText(ctx, "Thumbnail Error", Toast.LENGTH_SHORT).show();
-//                Log.d("ThumbNail Err:","Youtube_Thumbnail_Error");
-//            }
-//        };
+
 
         holder.youTubeThumbnailView.initialize("AIzaSyDbWv-CuiV9DcBoOhDtORRruGGHp0RN72M", new YouTubeThumbnailView.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, final YouTubeThumbnailLoader youTubeThumbnailLoader) {
                 youTubeThumbnailLoader.setVideo(VideoID[position]);
 
-
-//                youTubeThumbnailLoader.setOnThumbnailLoadedListener(new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
-//                    @Override
-//                    public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
-//                        youTubeThumbnailView.setVisibility(View.VISIBLE);
-//                        holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
-//                       // youTubeThumbnailLoader.release();
-//                    }
-//
-//                    @Override
-//                    public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
-//                      //  youTubeThumbnailLoader.release();
-//                    }
-//                });
 
 
             }//onInitializeSuccess

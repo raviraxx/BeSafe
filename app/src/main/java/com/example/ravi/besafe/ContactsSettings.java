@@ -49,10 +49,7 @@ public class ContactsSettings extends AppCompatActivity {
 
         databaseHelper=new DatabaseHelper(ContactsSettings.this);
         btn_add=findViewById(R.id.btn_addContact);
-       // btn_delete=findViewById(R.id.btn_deleteContact);
 
-//        tv_contacts=findViewById(R.id.tv_contacts);
-//        tv_contacts.setMovementMethod(new ScrollingMovementMethod());
         lv_contacts=findViewById(R.id.list1);
         if(databaseHelper.readContacts().size()>0){
             contactsList=databaseHelper.readContacts();
@@ -65,14 +62,9 @@ public class ContactsSettings extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences("prefs",0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("firstTime",true);
-        editor.commit();
+        editor.apply();
 
 
-
-
-
-       //
-        // refreshTextView();
         btn_add.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -83,7 +75,7 @@ public class ContactsSettings extends AppCompatActivity {
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
 
                     new MultiContactPicker.Builder(ContactsSettings.this) //Activity/fragment context
-                            //.theme(R.style.MyCustomPickerTheme) //Optional - default: MultiContactPicker.Azure
+
                             .hideScrollbar(false) //Optional - default: false
                             .showTrack(true) //Optional - default: true
                             .searchIconColor(Color.WHITE) //Option - default: White
@@ -116,39 +108,6 @@ public class ContactsSettings extends AppCompatActivity {
         });
 
 
-//        btn_delete.setOnClickListener(new View.OnClickListener() {
-//
-//
-//
-//            @Override
-//            public void onClick(View view) {
-//
-//                String number=et_contact.getText().toString();
-//
-//                if(TextUtils.isEmpty(number)){
-//                    et_contact.setError(getString(R.string.empty_number));
-//                    et_contact.requestFocus();
-//                    return;
-//
-//                }
-//
-//                if(number.length()!=10){
-//                    et_contact.setError(getString(R.string.invalid_number));
-//                    et_contact.requestFocus();
-//                    return;
-//                }
-//
-//
-//                if(databaseHelper.deleteContact(number)){
-//                    refreshTextView();
-//                    et_contact.setText("");
-//                    Toast.makeText(ContactsSettings.this, ""+getString(R.string.delete_success), Toast.LENGTH_SHORT).show();
-//                    }
-//                else{
-//                    Toast.makeText(ContactsSettings.this, ""+getString(R.string.delete_failure), Toast.LENGTH_SHORT).show();
-//                    }
-//            }
-//        });
 
     }
 

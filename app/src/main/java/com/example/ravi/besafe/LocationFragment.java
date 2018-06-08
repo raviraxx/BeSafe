@@ -49,19 +49,16 @@ import static android.app.Activity.RESULT_OK;
 
 public class LocationFragment extends Fragment {
 
-//Todo Add sms cost and description (feature) in onboardng
+
     Context context;
     LocationManager locationManager;
     LocationListener locationListener;
     Double latitude = 0.0;
     Double longitude = 0.0;
-    Double oldlatitude=0.0;
-    Double oldlongitude=0.0;
 
     long oldTime=0;
 
-    int smsCounter=0;
-    boolean locationFlag=false;
+
     public static final int PERMISSION_REQUEST = 1000;
     public static final int GPS_REQUEST = 2000;
     boolean inDanger = false;
@@ -130,7 +127,7 @@ public class LocationFragment extends Fragment {
 
                         btn_alert.setText(getString(R.string.btn_safeText));
                         btn_alert.setBackgroundResource(R.drawable.safe_btn);
-                        //printaddress(latitude,longitude,"btn_alert");
+
                         sendSMS();
 
 
@@ -155,13 +152,7 @@ public class LocationFragment extends Fragment {
 
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS}, PERMISSION_REQUEST);
             return;
         }
@@ -228,8 +219,7 @@ public class LocationFragment extends Fragment {
             }
             if(inDanger){
 
-                //String message=getString(R.string.btn_dangerText)+"\n"+tv_location.getText().toString();
-                //smsManager.sendTextMessage("8291565088",null,message,null,null);
+
                 sendSMS();
             }
 
@@ -243,7 +233,7 @@ public class LocationFragment extends Fragment {
 
     public void sendSMS(){
 
-        //Cursor cursor=databaseHelper.viewData();
+
         long newTime= Calendar.getInstance().getTimeInMillis();
         if(newTime-oldTime >= 3000) {
 
@@ -255,13 +245,13 @@ public class LocationFragment extends Fragment {
 
             if (contactsList.size() > 0) {
 
-                //StringBuffer stringBuffer=new StringBuffer();
+
                 for (String contact : contactsList) {
 
-                    //String contact=cursor.getString(1);
+
                     smsManager.sendTextMessage(contact, null, message, null, null);
                 }
-                //Toast.makeText(this, "Location Shared", Toast.LENGTH_SHORT).show();
+
 
 
             }
@@ -273,23 +263,23 @@ public class LocationFragment extends Fragment {
 
     public void sendSafeSMS(String message){
 
-        //Cursor cursor=databaseHelper.viewData();
+
         List<String> contactsList = databaseHelper.readContacts();
 
             if (contactsList.size() > 0) {
 
-                //StringBuffer stringBuffer=new StringBuffer();
+
                 for (String contact : contactsList) {
 
-                    //String contact=cursor.getString(1);
+
                     smsManager.sendTextMessage(contact, null, message, null, null);
                 }
-                //Toast.makeText(this, "Location Shared", Toast.LENGTH_SHORT).show();
+
 
 
             }
 
-       // smsCounter++;
+
 
     }
 
@@ -300,13 +290,7 @@ public class LocationFragment extends Fragment {
         if (requestCode == PERMISSION_REQUEST && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS}, PERMISSION_REQUEST);
                 return;
             }
@@ -329,13 +313,7 @@ public class LocationFragment extends Fragment {
         if (requestCode == GPS_REQUEST && resultCode == RESULT_OK) {
 
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.SEND_SMS}, PERMISSION_REQUEST);
                 return;
             }
@@ -361,7 +339,7 @@ public class LocationFragment extends Fragment {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
-        //dialog.setCancelable(false);
+
         dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
@@ -425,8 +403,7 @@ public class LocationFragment extends Fragment {
                     }
 
                     if (!gps_enabled && !network_enabled) {
-                        // notify user
-                      // createDialog();
+
                         Message message=Message.obtain();
                         message.what=10;
                         handler.sendMessage(message);

@@ -115,9 +115,6 @@ public class OnBoardingWithPer extends IntroActivity {
                         }
 
 
-
-//                        startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
-//                        finish();
                     }
                 })
                 .build());

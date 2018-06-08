@@ -16,8 +16,7 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    //Todo Add Volume Rockers description in OnBoarding
-    //Todo Add Network Check in Videos fragment
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

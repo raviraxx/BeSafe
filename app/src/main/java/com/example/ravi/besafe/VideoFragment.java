@@ -23,7 +23,7 @@ public class VideoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.videos_fragment,null);
         recyclerView=view.findViewById(R.id.recyclerView);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

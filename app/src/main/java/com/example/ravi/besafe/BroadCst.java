@@ -51,7 +51,7 @@ public class BroadCst extends BroadcastReceiver {
                 }
             },0,200);
         }
-//       context.startService(new Intent(context,ExampSer.class));
+
 
     }
 

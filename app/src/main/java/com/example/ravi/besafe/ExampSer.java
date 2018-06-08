@@ -52,22 +52,6 @@ public class ExampSer extends Service {
             Toast.makeText(this, ""+str, Toast.LENGTH_SHORT).show();
         }
 
-        //Intent activityIntent=new Intent(this,MainActivity.class);
-        //PendingIntent contentIntent=PendingIntent.getActivity(this,0,activityIntent,0);
-
-
-//        Intent stopSer=new Intent(this,MainActivity.class);
-//        PendingIntent sservice=PendingIntent.getService()
-
-//        Notification notification=new NotificationCompat.Builder(this,Channel_id).setContentTitle("BeSafe Service Running")
-//                //.setContentText("Example")
-//                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-//                .setContentIntent(contentIntent)
-//                .setAutoCancel(true)
-////                .addAction(R.mipmap.ic_launcher,"Stop Service",sservice)
-//                .build();
-
-      //  startForeground(1,notification);
 
         return START_STICKY;
     }

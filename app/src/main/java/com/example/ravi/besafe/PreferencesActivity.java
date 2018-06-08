@@ -17,16 +17,14 @@ public class PreferencesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-       // setContentView(R.layout.activity_preferences);
+
         SharedPreferences sharedPreferences;
 
         sharedPreferences=getSharedPreferences("prefs",0);
         boolean first=sharedPreferences.getBoolean("firstTime",false);
         if(first==false)
         {
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putBoolean("firstTime",true);
-//            editor.commit();
+
             startActivity(new Intent(getApplicationContext(),OnBoardingWithPer.class));
             finish();
         }
