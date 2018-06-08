@@ -198,7 +198,7 @@ public class LocationFragment extends Fragment {
 
                 if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M) {
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivityForResult(intent, GPS_REQUEST);
+                    activity.startActivityForResult(intent, GPS_REQUEST);
                 }
 
             }
@@ -361,7 +361,7 @@ public class LocationFragment extends Fragment {
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
                 // TODO Auto-generated method stub
                 Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivityForResult(myIntent,50);
+                activity.startActivityForResult(myIntent,50);
                 //get gps
             }
         });
