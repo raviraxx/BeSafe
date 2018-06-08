@@ -354,7 +354,7 @@ public class LocationFragment extends Fragment {
 
     void createDialog(){
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
         dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
             @Override
@@ -409,13 +409,14 @@ public class LocationFragment extends Fragment {
         @Override
         public synchronized void run() {
 
+            Message threadMessage=Message.obtain();
+            threadMessage.what=11;
+            handler.sendMessage(threadMessage);
 
             while (runThread) {
 
-                Message threadMessage=Message.obtain();
-                    threadMessage.what=11;
-                    handler.sendMessage(threadMessage);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 
                     LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                     boolean gps_enabled = false;
