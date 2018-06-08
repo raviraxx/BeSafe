@@ -60,8 +60,10 @@ public class ContactsSettings extends AppCompatActivity {
             contactsList=new ArrayList<>();
         }
 
-
-
+        SharedPreferences sharedPreferences=getSharedPreferences("prefs",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("firstTime",true);
+        editor.commit();
 
 
 

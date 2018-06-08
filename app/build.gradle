@@ -33,7 +33,7 @@ dependencies {
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.github.broakenmedia:MultiContactPicker:1.7'
-    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.11.0'
+
 
 
 }

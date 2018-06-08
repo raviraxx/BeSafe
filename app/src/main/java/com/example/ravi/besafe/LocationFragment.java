@@ -32,9 +32,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -214,12 +211,15 @@ public class LocationFragment extends Fragment {
     public void printaddress(double latitude, double longitude){
         try {
             geocoder=new Geocoder(context, Locale.getDefault());
-            addresses=geocoder.getFromLocation(latitude,longitude,1);
-            String address=addresses.get(0).getAddressLine(0);
 
-            tv_location.setText(address);
-            coordinates = "\n\nLatitude-> " + latitude + "\nLongitude->" + longitude;
-            tv_location.append(coordinates);
+            if(latitude>0.0 && longitude>0.0) {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                String address = addresses.get(0).getAddressLine(0);
+
+                tv_location.setText(address);
+                coordinates = "\n\nLatitude-> " + latitude + "\nLongitude->" + longitude;
+                tv_location.append(coordinates);
+            }
             if(inDanger){
 
                 String message=getString(R.string.btn_dangerText)+"\n"+tv_location.getText().toString();

@@ -14,9 +14,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     //Todo Add Volume Rockers description in OnBoarding
@@ -31,72 +28,72 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         navigation.setOnNavigationItemSelectedListener(this);
         //loadFragment(new LocationFragment(MainActivity.this));
        // ActivityManager manager=(ActivityManager)getSystemService(ACTIVITY_SERVICE);
-        SharedPreferences sharedPreferences=getSharedPreferences("firstTime",0);
-        boolean first = sharedPreferences.getBoolean("pehliBaar",false);
-        if (!first) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
-                    .targets(
-//                            TapTarget.forView(findViewById(R.id.settings_change_number),"Contact Settings","Add new or Delete saved contacts!").id(1)
+//        SharedPreferences sharedPreferences=getSharedPreferences("firstTime",0);
+//        boolean first = sharedPreferences.getBoolean("pehliBaar",false);
+//        if (!first) {
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
+//                    .targets(
+////                            TapTarget.forView(findViewById(R.id.settings_change_number),"Contact Settings","Add new or Delete saved contacts!").id(1)
+////                                    .dimColor(android.R.color.black)
+////                                    .outerCircleColor(R.color.color_dark_material_bold)
+////                                    .targetCircleColor(android.R.color.black)
+////                                    .textColor(android.R.color.black),
+//
+//
+//                            TapTarget.forView(findViewById(R.id.navigation_dashboard),"Videos","Watch videos for self defence practices").id(1)
 //                                    .dimColor(android.R.color.black)
-//                                    .outerCircleColor(R.color.color_dark_material_bold)
+//                                    .outerCircleColor(R.color.color_dark_permissions)
 //                                    .targetCircleColor(android.R.color.black)
 //                                    .textColor(android.R.color.black),
-
-
-                            TapTarget.forView(findViewById(R.id.navigation_dashboard),"Videos","Watch videos for self defence practices").id(1)
-                                    .dimColor(android.R.color.black)
-                                    .outerCircleColor(R.color.color_dark_permissions)
-                                    .targetCircleColor(android.R.color.black)
-                                    .textColor(android.R.color.black),
-//                            TapTarget.forView(findViewById(R.id.settings_change_number),"Contact Settings","Add new or Delete saved contacts!").id(1)
+////                            TapTarget.forView(findViewById(R.id.settings_change_number),"Contact Settings","Add new or Delete saved contacts!").id(1)
+////                                    .dimColor(android.R.color.black)
+////                                    .outerCircleColor(R.color.color_dark_material_bold)
+////                                    .targetCircleColor(android.R.color.black)
+////                                    .textColor(android.R.color.black)
+//
+//
+//                            TapTarget.forView(findViewById(R.id.navigation_home),"Send Sms","After clicking Danger Button Location would be shared to contacts each time location gets changed until safe button is clicked")
+//                                    .id(2)
 //                                    .dimColor(android.R.color.black)
-//                                    .outerCircleColor(R.color.color_dark_material_bold)
+//                                    .outerCircleColor(R.color.color_dark_permissions)
 //                                    .targetCircleColor(android.R.color.black)
 //                                    .textColor(android.R.color.black)
-
-
-                            TapTarget.forView(findViewById(R.id.navigation_home),"Send Sms","After clicking Danger Button Location would be shared to contacts each time location gets changed until safe button is clicked")
-                                    .id(2)
-                                    .dimColor(android.R.color.black)
-                                    .outerCircleColor(R.color.color_dark_permissions)
-                                    .targetCircleColor(android.R.color.black)
-                                    .textColor(android.R.color.black)
-
-
-                    )
-
-                    .listener(new TapTargetSequence.Listener() {
-                        @Override
-                        public void onSequenceFinish() {
-                            Toast.makeText(getApplicationContext(), "You got it", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-                            if(lastTarget.id()==1)
-                            {
-                                //Toast.makeText(getApplicationContext(), "You clicked Home", Toast.LENGTH_SHORT).show();
-                            }
-                            if(lastTarget.id()==2)
-                            {
-                                //Toast.makeText(Main2Activity.this, "You clicked Dashboard", Toast.LENGTH_SHORT).show();
-                            }
-                            if(lastTarget.id()==-1)
-                            {
-                                //Toast.makeText(Main2Activity.this, "You clicked Notifications", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onSequenceCanceled(TapTarget lastTarget) {
-
-                        }
-                    });
-            sequence.start();
-            editor.putBoolean("pehliBaar", true);
-            editor.commit();
-        }
+//
+//
+//                    )
+//
+//                    .listener(new TapTargetSequence.Listener() {
+//                        @Override
+//                        public void onSequenceFinish() {
+//                            Toast.makeText(getApplicationContext(), "You got it", Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                        @Override
+//                        public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+//                            if(lastTarget.id()==1)
+//                            {
+//                                //Toast.makeText(getApplicationContext(), "You clicked Home", Toast.LENGTH_SHORT).show();
+//                            }
+//                            if(lastTarget.id()==2)
+//                            {
+//                                //Toast.makeText(Main2Activity.this, "You clicked Dashboard", Toast.LENGTH_SHORT).show();
+//                            }
+//                            if(lastTarget.id()==-1)
+//                            {
+//                                //Toast.makeText(Main2Activity.this, "You clicked Notifications", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onSequenceCanceled(TapTarget lastTarget) {
+//
+//                        }
+//                    });
+//            sequence.start();
+//            editor.putBoolean("pehliBaar", true);
+//            editor.commit();
+//        }
         loadFragment(new LocationFragment(getApplicationContext(),MainActivity.this));
 
 

@@ -2,7 +2,9 @@ package com.example.ravi.besafe;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ public class OnBoardingWithPer extends IntroActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent intent = getIntent();
         boolean fullscreen = intent.getBooleanExtra(EXTRA_FULLSCREEN, false);
         boolean permissions = intent.getBooleanExtra(EXTRA_PERMISSIONS, true);
@@ -100,6 +103,7 @@ public class OnBoardingWithPer extends IntroActivity {
                         ArrayList<String> contactList=databaseHelper.readContacts();
                         if(contactList.size()==0){
                             startActivity(new Intent(getApplicationContext(),ContactsSettings.class));
+                            finish();
                         }
                         else{
 

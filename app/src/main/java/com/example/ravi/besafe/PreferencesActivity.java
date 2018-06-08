@@ -24,9 +24,9 @@ public class PreferencesActivity extends AppCompatActivity {
         boolean first=sharedPreferences.getBoolean("firstTime",false);
         if(first==false)
         {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("firstTime",true);
-            editor.commit();
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putBoolean("firstTime",true);
+//            editor.commit();
             startActivity(new Intent(getApplicationContext(),OnBoardingWithPer.class));
             finish();
         }
