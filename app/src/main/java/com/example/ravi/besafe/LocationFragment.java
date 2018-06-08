@@ -129,7 +129,8 @@ public class LocationFragment extends Fragment {
 
                         btn_alert.setText(getString(R.string.btn_safeText));
                         btn_alert.setBackgroundResource(R.drawable.safe_btn);
-                        printaddress(latitude,longitude);
+                        //printaddress(latitude,longitude,"btn_alert");
+                        sendSMS();
 
 
                     }else{
@@ -167,7 +168,7 @@ public class LocationFragment extends Fragment {
         if (tempLocation != null) {
             latitude = tempLocation.getLatitude();
             longitude = tempLocation.getLongitude();
-            printaddress(latitude, longitude);
+            printaddress(latitude, longitude,"My Last Known Location");
         }
 
 
@@ -176,7 +177,7 @@ public class LocationFragment extends Fragment {
             public void onLocationChanged(Location location) {
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
-                printaddress(latitude, longitude);
+                printaddress(latitude, longitude,"");
 
             }
 
@@ -208,7 +209,7 @@ public class LocationFragment extends Fragment {
 
     }
 
-    public void printaddress(double latitude, double longitude){
+    public void printaddress(double latitude, double longitude,String text){
         try {
             geocoder=new Geocoder(context, Locale.getDefault());
 
@@ -216,16 +217,21 @@ public class LocationFragment extends Fragment {
                 addresses = geocoder.getFromLocation(latitude, longitude, 1);
                 String address = addresses.get(0).getAddressLine(0);
 
-                tv_location.setText(address);
+                if(text.equalsIgnoreCase("My Last Known Location"))
+                    tv_location.setText(text+"\n"+address);
+                else
+                    tv_location.setText(address);
+
                 coordinates = "\n\nLatitude-> " + latitude + "\nLongitude->" + longitude;
                 tv_location.append(coordinates);
             }
             if(inDanger){
 
-                String message=getString(R.string.btn_dangerText)+"\n"+tv_location.getText().toString();
+                //String message=getString(R.string.btn_dangerText)+"\n"+tv_location.getText().toString();
                 //smsManager.sendTextMessage("8291565088",null,message,null,null);
-                sendSMS(message);
+                sendSMS();
             }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -234,17 +240,16 @@ public class LocationFragment extends Fragment {
 
     }
 
-//    public void requestLocationUpdates(){
-//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-//    }
 
-    public void sendSMS(String message){
+    public void sendSMS(){
 
         //Cursor cursor=databaseHelper.viewData();
         long newTime= Calendar.getInstance().getTimeInMillis();
         if(newTime-oldTime >= 3000) {
 
             oldTime=newTime;
+
+            String message=getString(R.string.btn_dangerText)+"\n"+tv_location.getText().toString();
 
             List<String> contactsList = databaseHelper.readContacts();
 
@@ -309,7 +314,7 @@ public class LocationFragment extends Fragment {
             if (tempLocation != null) {
                 latitude = tempLocation.getLatitude();
                 longitude = tempLocation.getLongitude();
-                printaddress(latitude, longitude);
+                printaddress(latitude, longitude,"My last known Location");
             }
 
 
@@ -338,7 +343,7 @@ public class LocationFragment extends Fragment {
             if(tempLocation!=null){
                 latitude = tempLocation.getLatitude();
                 longitude = tempLocation.getLongitude();
-                printaddress(latitude, longitude);
+                printaddress(latitude, longitude,"My last known location");
             }
 
 
@@ -363,17 +368,10 @@ public class LocationFragment extends Fragment {
                 // TODO Auto-generated method stub
                 Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 activity.startActivityForResult(myIntent,50);
-                //get gps
+
             }
         });
-//                        dialog.setNegativeButton(context.getString(R.string.Cancel), new DialogInterface.OnClickListener() {
-//
-//                            @Override
-//                            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-//                                // TODO Auto-generated method stub
-//
-//                            }
-//                        });
+
         dialog.show();
 
 
@@ -388,13 +386,9 @@ public class LocationFragment extends Fragment {
             switch (message.what){
 
                 case 10:
-                    Toast.makeText(context, "creating dialog", Toast.LENGTH_SHORT).show();
+
                         createDialog();
                         return true;
-
-                case 11:
-                    Toast.makeText(context, "Thread started", Toast.LENGTH_SHORT).show();
-                    return true;
 
 
             }
@@ -409,10 +403,6 @@ public class LocationFragment extends Fragment {
     class locationRunnable implements Runnable{
         @Override
         public synchronized void run() {
-
-//            Message threadMessage=Message.obtain();
-//            threadMessage.what=11;
-//            handler.sendMessage(threadMessage);
 
             while (runThread) {
 

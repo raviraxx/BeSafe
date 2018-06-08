@@ -3,6 +3,7 @@ package com.example.ravi.besafe;
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -44,6 +45,7 @@ public class ContactsSettings extends AppCompatActivity {
         setContentView(R.layout.activity_contacts_settings);
         contactsPref=getSharedPreferences("contactsPref",0);
         prefEditor=contactsPref.edit();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         databaseHelper=new DatabaseHelper(ContactsSettings.this);
         btn_add=findViewById(R.id.btn_addContact);
@@ -150,6 +152,18 @@ public class ContactsSettings extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if(databaseHelper.readContacts().size()>0){
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            super.onBackPressed();
+
+        }else{
+            Toast.makeText(this, "Insert atleast one contact", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void gotoNext(View view) {
 
         if(databaseHelper.readContacts().size()>0){
@@ -161,6 +175,9 @@ public class ContactsSettings extends AppCompatActivity {
 
 
     }
+
+
+
 
 
 
