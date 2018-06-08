@@ -19,7 +19,7 @@
         card_view:cardUseCompatPadding="true">
         <com.google.android.youtube.player.YouTubeThumbnailView
             android:id="@+id/youtube_thumbnail"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="centerCrop"
             android:visibility="visible"/>

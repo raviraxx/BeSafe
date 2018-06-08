@@ -196,7 +196,7 @@ public class LocationFragment extends Fragment {
             @Override
             public void onProviderDisabled(String s) {
 
-                if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M) {
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     activity.startActivityForResult(intent, GPS_REQUEST);
                 }
@@ -409,14 +409,14 @@ public class LocationFragment extends Fragment {
         @Override
         public synchronized void run() {
 
-            Message threadMessage=Message.obtain();
-            threadMessage.what=11;
-            handler.sendMessage(threadMessage);
+//            Message threadMessage=Message.obtain();
+//            threadMessage.what=11;
+//            handler.sendMessage(threadMessage);
 
             while (runThread) {
 
 
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                if (Build.VERSION.SDK_INT > 22) {
 
                     LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                     boolean gps_enabled = false;
