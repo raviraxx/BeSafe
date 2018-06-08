@@ -22,17 +22,17 @@ import com.google.android.youtube.player.YouTubeThumbnailView;
  */
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    String[] VideoID = {"ORAOkP1h3R0",
-                        "T7aNSRoDCmg",
-                        "CKaa19kpqzM",
-                        "SAyn12l87-k",
-                        "Nkc8R_VtrAo",
-                        "2_HgPXgJ16I",
+//    String[] VideoID = {"ORAOkP1h3R0",
+//                        "T7aNSRoDCmg",
+//                        "CKaa19kpqzM",
+//                        "SAyn12l87-k",
+//                        "Nkc8R_VtrAo",
+//                        "2_HgPXgJ16I",
+//
+//
+//                        };
 
-
-                        };
-
-    /*  String[] VideoID = {"ORAOkP1h3R0",
+     String[] VideoID = {
                         "T7aNSRoDCmg",
                         "CKaa19kpqzM",
                         "XARIQt1Z20M",
@@ -44,8 +44,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                         "SAyn12l87-k",
                         "Nkc8R_VtrAo",
                         "2_HgPXgJ16I",
+                        "ORAOkP1h3R0",
                         "vX-OOfbnD9w","5cOtK3ZKIEw","ZwULI5wMtuY","1SRF-j9zjHM"
-                        };*/
+                        };
     Context ctx;
     public RecyclerAdapter(Context context) {
         this.ctx = context;
