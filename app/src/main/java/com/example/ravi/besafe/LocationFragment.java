@@ -192,6 +192,7 @@ public class LocationFragment extends Fragment {
             }
         };
 
+
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
 
 

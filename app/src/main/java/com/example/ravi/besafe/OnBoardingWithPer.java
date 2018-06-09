@@ -90,7 +90,7 @@ public class OnBoardingWithPer extends IntroActivity {
                     .backgroundDark(R.color.btn)
                     .scrollable(false)
                     .permissions(new String[]{Manifest.permission.CALL_PHONE,
-                            Manifest.permission.SEND_SMS,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.READ_CONTACTS})
+                            Manifest.permission.SEND_SMS,Manifest.permission.READ_CONTACTS,Manifest.permission.ACCESS_FINE_LOCATION})
 
                     .build();
             addSlide(permissionsSlide);
@@ -102,7 +102,7 @@ public class OnBoardingWithPer extends IntroActivity {
         addSlide(new SimpleSlide.Builder()
                 .title(R.string.title5)
                 .description(R.string.des)
-                .image(R.drawable.besafe_logo_colour)
+                //.image(R.drawable.besafe_logo_colour)
                 .background(R.color.color_dark_material_metaphor)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .scrollable(false)

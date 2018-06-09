@@ -77,12 +77,13 @@ public class ContactsSettings extends AppCompatActivity {
                     new MultiContactPicker.Builder(ContactsSettings.this) //Activity/fragment context
 
                             .hideScrollbar(false) //Optional - default: false
-                            .showTrack(true) //Optional - default: true
+                            .showTrack(false) //Optional - default: true
                             .searchIconColor(Color.WHITE) //Option - default: White
                             .setChoiceMode(MultiContactPicker.CHOICE_MODE_MULTIPLE) //Optional - default: CHOICE_MODE_MULTIPLE
                             .handleColor(ContextCompat.getColor(ContactsSettings.this, R.color.colorPrimary)) //Optional - default: Azure Blue
                             .bubbleColor(ContextCompat.getColor(ContactsSettings.this, R.color.colorPrimary)) //Optional - default: Azure Blue
                             .bubbleTextColor(Color.WHITE) //Optional - default: White
+
                             .showPickerForResult(CONTACT_PICKER_REQUEST);
 
 
@@ -119,17 +120,21 @@ public class ContactsSettings extends AppCompatActivity {
             super.onBackPressed();
 
         }else{
+
             Toast.makeText(this, "Insert atleast one contact", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void gotoNext(View view) {
 
+
         if(databaseHelper.readContacts().size()>0){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }else{
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
             Toast.makeText(this, "Insert atleast one contact", Toast.LENGTH_SHORT).show();
+            finish();
         }
 
 
