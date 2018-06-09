@@ -48,6 +48,16 @@ public class OnBoardingWithPer extends IntroActivity {
                 .scrollable(false)
                 .build());
 
+      //Slide 1
+        addSlide(new SimpleSlide.Builder()
+                .title(R.string.title9)
+                .description(R.string.description_9)
+                .background(R.color.color_dark_material_bold)
+                .backgroundDark(R.color.color_primary_dark)
+                .scrollable(false)
+                .build());
+
+
         //Slide 2
         addSlide(new SimpleSlide.Builder()
                 .title(R.string.title2)
@@ -58,10 +68,13 @@ public class OnBoardingWithPer extends IntroActivity {
                 .scrollable(false)
                 .build());
 
+
+        //sms Slide
         addSlide(new SimpleSlide.Builder()
-                .title(R.string.title9)
-                .description(R.string.description_9)
+                .title(R.string.title10)
+                .description(R.string.description_10)
                 .background(R.color.color_permissions)
+                .image(R.drawable.danger_btn)
                 .backgroundDark(R.color.color_dark_permissions)
                 .scrollable(false)
                 .build());

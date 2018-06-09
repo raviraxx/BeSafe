@@ -41,5 +41,7 @@
     <string name="description_9">Press any Volume key for 3seconds to call your saved contact person</string>
     <string name="newtxt">First Contact Displayed would always be used as Emergency Number</string>
     <string name="label_grant_permissions">Grant All Permissons</string>
+    <string name="title10">Share Location via SMS</string>
+    <string name="description_10">Danger Button will share location whenever location gets updated until it is clicked again to stop sharing location. Note: Sharing Location may incur cost depending upon your mobile carrier </string>
 
 </resources>
