@@ -51,8 +51,9 @@ public class OnBoardingWithPer extends IntroActivity {
       //Slide 1
         addSlide(new SimpleSlide.Builder()
                 .title(R.string.title9)
+                .image(R.drawable.v_logo)
                 .description(R.string.description_9)
-                .background(R.color.color_dark_material_bold)
+                .background(R.color.color_permissions)
                 .backgroundDark(R.color.color_primary_dark)
                 .scrollable(false)
                 .build());

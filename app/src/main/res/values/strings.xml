@@ -6,11 +6,11 @@
     <string name="description_1">We are dedicated towards your safety!</string>
     <string name="title2">Watch Self Defence Videos</string>
     <string name="description_2">Train to Protect yourselves from any Kind of Dangerous situation</string>
-    <string name="title3">Add Permissions</string>
-    <string name="description_3">Permissions are required to make this app work fluently(Do allow all permissions)</string>
+    <string name="title3"><b>Add Permissions</b></string>
+    <string name="description_3"><b>Permissions are required to make this app work fluently<u>(Do allow all permissions)</u></b></string>
     <string name="go">Ready to go Inside</string>
     <string name="title5">All Set to Go Inside</string>
-    <string name="des">Just One More thing: Try to keep your Gps Enabled</string>
+    <string name="des"><b><u>Just One More thing: Try to keep your Gps Enabled</u></b></string>
     <string name="et_contactno">Contact Number</string>
     <string name="btn_addContact">add contact</string>
     <string name="btn_deleteContact">delete contact</string>
@@ -37,11 +37,11 @@
     <string name="gps_network_not_enabled">GPS NOT ENABLED</string>
     <string name="open_location_settings">OPEN LOCATION SETTINGS</string>
     <string name="Cancel">Cancel</string>
-    <string name="title9">Tips to use this App</string>
-    <string name="description_9">Press any Volume key for 3seconds to call your saved contact person</string>
+    <string name="title9"><b>Tips to use this App</b></string>
+    <string name="description_9"><b>Press any Volume key for 3seconds to call your saved contact person</b></string>
     <string name="newtxt">First Contact Displayed would always be used as Emergency Number</string>
     <string name="label_grant_permissions">Grant All Permissons</string>
-    <string name="title10">Share Location via SMS</string>
-    <string name="description_10">Danger Button will share location whenever location gets updated until it is clicked again to stop sharing location. Note: Sharing Location may incur cost depending upon your mobile carrier </string>
+    <string name="title10"><b>Share Location via SMS</b></string>
+    <string name="description_10"><b>Danger Button will share location whenever location gets updated until it is clicked again to stop sharing location. Note: Sharing Location may incur cost depending upon your mobile carrier</b> </string>
 
 </resources>
