@@ -28,6 +28,8 @@ import java.util.List;
 
 public class ContactsSettings extends AppCompatActivity {
 
+
+
     Button btn_add,btn_delete;
 
     DatabaseHelper databaseHelper;
@@ -132,7 +134,7 @@ public class ContactsSettings extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }else{
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
             Toast.makeText(this, "Insert atleast one contact", Toast.LENGTH_SHORT).show();
             finish();
         }

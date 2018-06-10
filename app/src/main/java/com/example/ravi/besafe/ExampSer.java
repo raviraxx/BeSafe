@@ -1,9 +1,11 @@
 package com.example.ravi.besafe;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,6 +13,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -20,6 +24,8 @@ import android.widget.Toast;
 
 public class ExampSer extends Service {
     String number;
+    boolean runService;
+    DatabaseHelper databaseHelper;
 //db se lena
     @Nullable
     @Override
@@ -30,7 +36,15 @@ public class ExampSer extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        number=new DatabaseHelper(ExampSer.this).readContacts().get(0);
+        databaseHelper=new DatabaseHelper(ExampSer.this);
+
+        if(databaseHelper.readContacts().size()>0){
+            number=databaseHelper.readContacts().get(0);
+        }else{
+            number="0";
+        }
+
+
     }
 
     @Override
@@ -39,13 +53,28 @@ public class ExampSer extends Service {
         {
             // ActivityCompat.requestPermissions((Activity) getApplicationContext(),new String[]{Manifest.permission.CALL_PHONE},Request_Call);
         }
-        else{
+        else if(!number.equals("0")){
+
+
             String dial = "tel:"+number;
+            Log.d("ExampleService","Service is running");
             Intent i=new Intent(Intent.ACTION_CALL, Uri.parse(dial));
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
+
+
+            }
+            else{
+
+            Toast.makeText(this, "Contact List is Empty", Toast.LENGTH_LONG).show();
         }
 
         return START_STICKY;
     }
+
+
+
+
+
+
 }

@@ -50,6 +50,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class LocationFragment extends Fragment {
 
+    //line 251      onclick lf java 129     sendsms lf 251
 
     Context context;
     LocationManager locationManager;
@@ -58,6 +59,7 @@ public class LocationFragment extends Fragment {
     Double longitude = 0.0;
 
     long oldTime=0;
+    boolean dialogFlag=false;
 
 
     public static final int PERMISSION_REQUEST = 1000;
@@ -348,7 +350,6 @@ public class LocationFragment extends Fragment {
 
             }
         });
-
         dialog.show();
 
 
@@ -360,13 +361,19 @@ public class LocationFragment extends Fragment {
         @Override
         public boolean handleMessage(Message message) {
 
-            switch (message.what){
 
-                case 10:
+            if(dialogFlag) {
+
+                switch (message.what) {
+
+                    case 10:
+
 
                         createDialog();
                         return true;
 
+
+                }
 
             }
 
@@ -422,6 +429,16 @@ public class LocationFragment extends Fragment {
         }
     };
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        dialogFlag=false;
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        dialogFlag=true;
 
+    }
 }
