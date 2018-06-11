@@ -136,7 +136,7 @@ public class ContactsSettings extends AppCompatActivity {
         }else{
 
             Toast.makeText(this, "Insert atleast one contact", Toast.LENGTH_SHORT).show();
-            finish();
+
         }
 
 

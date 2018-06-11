@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,14 +50,16 @@ public class OnBoardingWithPer extends IntroActivity {
                 .build());
 
       //Slide 1
-        addSlide(new SimpleSlide.Builder()
-                .title(R.string.title9)
-                .image(R.drawable.v_logo)
-                .description(R.string.description_9)
-                .background(R.color.color_permissions)
-                .backgroundDark(R.color.color_primary_dark)
-                .scrollable(false)
-                .build());
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            addSlide(new SimpleSlide.Builder()
+                    .title(R.string.title9)
+                    .image(R.drawable.v_logo)
+                    .description(R.string.description_9)
+                    .background(R.color.color_permissions)
+                    .backgroundDark(R.color.color_primary_dark)
+                    .scrollable(false)
+                    .build());
+        }
 
 
         //Slide 2
@@ -90,7 +93,7 @@ public class OnBoardingWithPer extends IntroActivity {
                     .backgroundDark(R.color.btn)
                     .scrollable(false)
                     .permissions(new String[]{Manifest.permission.CALL_PHONE,
-                            Manifest.permission.SEND_SMS,Manifest.permission.READ_CONTACTS,Manifest.permission.ACCESS_FINE_LOCATION})
+                            Manifest.permission.SEND_SMS,Manifest.permission.READ_CONTACTS,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE,Manifest.permission.ACCESS_NETWORK_STATE})
 
                     .build();
             addSlide(permissionsSlide);

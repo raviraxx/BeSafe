@@ -3,6 +3,7 @@ package com.example.ravi.besafe;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,6 +20,7 @@ public class BroadCst extends BroadcastReceiver {
     public static boolean sIsAppWorkFinished=true;
     @Override
     public void onReceive(final Context context, Intent intent) {
+
 
         sIsReceived=true;
         if(sTimer==null && sIsAppWorkFinished){

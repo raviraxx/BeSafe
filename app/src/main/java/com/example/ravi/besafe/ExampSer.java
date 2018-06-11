@@ -38,11 +38,9 @@ public class ExampSer extends Service {
         super.onCreate();
         databaseHelper=new DatabaseHelper(ExampSer.this);
 
-        if(databaseHelper.readContacts().size()>0){
+
             number=databaseHelper.readContacts().get(0);
-        }else{
-            number="0";
-        }
+
 
 
     }
@@ -53,9 +51,9 @@ public class ExampSer extends Service {
         {
             // ActivityCompat.requestPermissions((Activity) getApplicationContext(),new String[]{Manifest.permission.CALL_PHONE},Request_Call);
         }
-        else if(!number.equals("0")){
+        else{
 
-
+          //  Toast.makeText(this, "Calling Emergency Number", Toast.LENGTH_SHORT).show();
             String dial = "tel:"+number;
             Log.d("ExampleService","Service is running");
             Intent i=new Intent(Intent.ACTION_CALL, Uri.parse(dial));
@@ -64,10 +62,7 @@ public class ExampSer extends Service {
 
 
             }
-            else{
 
-            Toast.makeText(this, "Contact List is Empty", Toast.LENGTH_LONG).show();
-        }
 
         return START_STICKY;
     }
